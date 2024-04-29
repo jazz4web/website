@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Website</title>
+  </head>
+  <body>
+    <div class="empty-page">Сайт в стадии разработки...</div>
+    {% if data %}
+      <div class="user-field">
+        Пользователь: {{ data.get('username') }};
+      </div>
+      <div class="message">
+        Статус: {{ data.get('message') }}.
+      </div>
+    {% endif %}
+  </body>
+</html>
