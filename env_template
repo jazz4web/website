@@ -4,3 +4,5 @@ DSN=
 USER=jazz
 DB=websitedev
 REDI='redis://localhost:6379/0'
+SECRET_KEY='secret key'
+SESSION_LIFETIME=864000
