@@ -14,6 +14,7 @@ from webassets import Environment as AssetsEnvironment
 from webassets.ext.jinja2 import assets
 
 from .dirs import base, static, templates, settings
+from .errors import show_error
 from .main.views import show_favicon, show_index
 
 try:
@@ -60,12 +61,14 @@ class StApp(Starlette):
             self.middleware_stack = self.build_middleware_stack()
         await self.middleware_stack(scope, receive, send)
 
+
 middleware = [
     Middleware(
         SessionMiddleware,
         secret_key=settings('SECRET_KEY'),
         max_age=settings.get('SESSION_LIFETIME', cast=int))]
 
+errs = {404: show_error}
 
 app = StApp(
     debug=settings.get('DEBUG', cast=bool),
@@ -73,5 +76,6 @@ app = StApp(
         Route('/', show_index, name='index'),
         Route('/favicon.ico', show_favicon, name='favicon'),
         Mount('/static', app=StaticFiles(directory=static), name='static')],
-    middleware=middleware)
+    middleware=middleware,
+    exception_handlers=errs)
 
