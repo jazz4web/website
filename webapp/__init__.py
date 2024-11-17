@@ -29,6 +29,7 @@ class J2Templates(Jinja2Templates):
         env_options.setdefault("extensions", [assets])
         env = jinja2.Environment(**env_options)
         env.assets_environment = assets_env
+        env.globals["config"] = settings
         return env
 
 

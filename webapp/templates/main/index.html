@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Website Index Page</title>
-    {% assets filters='cssmin', output='generic/css/main/index.css',
-               'css/base.css' -%}
-      <link rel="stylesheet" href="{{ ASSET_URL }}">
-    {%- endassets -%}
-  </head>
-  <body>
-    <div>Сайт в стадии разработки, попробуйте зайти позже.</div>
-    {% if request.app.config.get('DEBUG') == 'True' %}
-      <div>В приложении включен отладчик.</div>
-    {% endif %}
-    {%- assets filters='rjsmin', output='generic/js/main/index.js',
-               'js/main/index.js' -%}
-      <script src="{{ ASSET_URL }}"></script>
-    {%- endassets -%}
-  </body>
-</html>
+{% extends "base.html" %}
+
+{% block styles %}
+  {{ super() }}
+  {% assets filters='cssmin', output='generic/css/main/index.css',
+            'css/base.css' %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+  {% endassets %}
+{% endblock styles %}
+
+{% block scripts %}
+  {{ super() }}
+  {% assets filters='rjsmin', output='generic/js/main/index.js',
+            'js/main/index.js' %}
+    <script src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+{% endblock scripts %}

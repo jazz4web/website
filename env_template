@@ -1,2 +1,4 @@
 DEBUG=True
 ASSETS_DEBUG=False
+SNAME=Website
+SDATE=2024

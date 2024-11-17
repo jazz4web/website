@@ -16,4 +16,5 @@ $ cp env_template .env
 $ mkdir webapp/static/generic
 $ ln -s -T ~/sites/website/webapp/static/vendor/bootstrap/fonts \
   webapp/static/generic/fonts
+$ python runserver.py
 ```
