@@ -1,16 +1,41 @@
 {% extends "base.html" %}
 
+{% block title_part %}
+  Index Page
+{% endblock title_part %}
+
+{% block metas %}
+  {{ super() }}
+  <meta name="description"
+              content="{{ config.get('SDESC') }}">
+{% endblock metas %}
+
 {% block styles %}
   {{ super() }}
   {% assets filters='cssmin', output='generic/css/main/index.css',
-            'css/base.css' %}
+            'css/base.css',
+            'css/page-content.css',
+            'css/flashed-alert.css',
+            'css/empty-message.css',
+            'css/today-field.css' %}
     <link rel="stylesheet" href="{{ ASSET_URL }}">
   {% endassets %}
 {% endblock styles %}
 
+{% block page_body %}
+  <div class="flashed-alert">
+    <div class="today-field"></div>
+    <div class="empty-message">
+      Сайт в стадии разработки, попробуйте зайти позже.
+    </div>
+  </div>
+{% endblock page_body %}
+
 {% block scripts %}
   {{ super() }}
   {% assets filters='rjsmin', output='generic/js/main/index.js',
+            'js/render-tf.js',
+            'js/check-pc.js',
             'js/main/index.js' %}
     <script src="{{ ASSET_URL }}"></script>
   {% endassets %}

@@ -7,7 +7,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock metas %}
     {% block title %}
-      <title>Website</title>
+      <title>
+        {{ config.get('SNAME') }}:
+        {% block title_part %}{% endblock title_part %}
+      </title>
     {% endblock title %}
     {% block styles %}
       <link rel="icon"
@@ -76,6 +79,12 @@
         </div>
       </div>
     </nav>
+    <!-- page content -->
+    <div id="page-content">
+      <div id="mc">
+        {% block page_body %}{% endblock page_body %}
+      </div>
+    </div>
     <!-- page content -->
     <footer id="footer">
       <div class="container-fluid">

@@ -2,3 +2,4 @@ DEBUG=True
 ASSETS_DEBUG=False
 SNAME=Website
 SDATE=2024
+SDESC='Демонстрационное web-приложение на Python и Starlette'

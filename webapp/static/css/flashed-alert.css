@@ -1,0 +1,16 @@
+.flashed-alert {
+  border: 1px solid palegoldenrod;
+  border-radius: 4px;
+  padding: 12px;
+  background-color: lemonchiffon;
+  background-image: linear-gradient(to bottom, lemonchiffon, lemonchiffon);
+  box-shadow: 0 0 4px silver;
+  text-shadow: 0 0 4px silver;
+  text-align: justify;
+  color: gray;
+  margin: 0 0 4px
+}
+
+.closeable:hover {
+  cursor: pointer;
+}
