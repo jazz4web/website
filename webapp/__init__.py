@@ -10,6 +10,7 @@ from webassets import Environment as AssetsEnvironment
 from webassets.ext.jinja2 import assets
 
 from .dirs import settings, static, templates
+from .errors import show_error
 from .main.views import show_favicon, show_index, show_robots
 
 DI = '''typing.Union[str, os.PathLike[typing.AnyStr],
@@ -43,6 +44,10 @@ class StApp(Starlette):
             self.middleware_stack = self.build_middleware_stack()
         await self.middleware_stack(scope, receive, send)
 
+errs = {403: show_error,
+        404: show_error,
+        405: show_error}
+
 
 app = StApp(
     debug=settings.get('DEBUG', cast=bool),
@@ -50,4 +55,5 @@ app = StApp(
         Route('/', show_index, name='index'),
         Route('/favicon.ico', show_favicon, name='favicon'),
         Route('/robots.txt', show_robots, name='robots.txt'),
-        Mount('/static', app=StaticFiles(directory=static), name='static')])
+        Mount('/static', app=StaticFiles(directory=static), name='static')],
+    exception_handlers=errs)

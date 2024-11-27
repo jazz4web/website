@@ -1,4 +1,6 @@
-Демонстрационное web-приложение на Python и Starlette.
+Демонстрационное [web-приложение](https://avm4.ru/blogs/programming/t/webapp)
+на Python и Starlette. Детальное пошаговое описание процесса разработки можно
+найти на моём сайте по ссылке.
 
 Порядок запуска на базе Debian trixie:
 
