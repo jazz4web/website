@@ -2,7 +2,9 @@ import jinja2
 import typing
 
 from starlette.applications import Starlette
+from starlette.middleware import Middleware
 from starlette.routing import Mount, Route
+from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 from starlette.types import Receive, Scope, Send
 from starlette.templating import Jinja2Templates
@@ -12,6 +14,15 @@ from webassets.ext.jinja2 import assets
 from .dirs import settings, static, templates
 from .errors import show_error
 from .main.views import show_favicon, show_index, show_robots
+
+try:
+    from .tuning import SECRET_KEY, SDESC
+    if SECRET_KEY:
+        settings.file_values['SECRET_KEY'] = SECRET_KEY
+    if SDESC:
+        settings.file_values['SDESC'] = SDESC
+except ModuleNotFoundError:
+    pass
 
 DI = '''typing.Union[str, os.PathLike[typing.AnyStr],
 typing.Sequence[typing.Union[str,
@@ -48,6 +59,12 @@ errs = {403: show_error,
         404: show_error,
         405: show_error}
 
+middleware = [
+    Middleware(
+        SessionMiddleware,
+        secret_key=settings('SECRET_KEY'),
+        max_age=settings.get('SESSION_LIFETIME', cast=int))]
+
 
 app = StApp(
     debug=settings.get('DEBUG', cast=bool),
@@ -56,4 +73,5 @@ app = StApp(
         Route('/favicon.ico', show_favicon, name='favicon'),
         Route('/robots.txt', show_robots, name='robots.txt'),
         Mount('/static', app=StaticFiles(directory=static), name='static')],
+    middleware=middleware,
     exception_handlers=errs)

@@ -1,6 +1,7 @@
 *.pyc
 *.swp
 .env
+tuning.py
 __pycache__
 venv
 vendor
