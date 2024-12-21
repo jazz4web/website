@@ -3,6 +3,7 @@ import os
 from starlette.responses import FileResponse, PlainTextResponse
 
 from ..dirs import images
+from ..common.flashed import get_flashed, set_flashed
 
 
 async def show_favicon(request):
@@ -16,6 +17,8 @@ async def show_robots(request):
 
 
 async def show_index(request):
+    await set_flashed(request, 'Сайт ещё не готов...')
     return request.app.jinja.TemplateResponse(
         'main/index.html',
-        {'request': request})
+        {'request': request,
+         'flashed': await get_flashed(request)})
