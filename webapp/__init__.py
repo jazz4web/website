@@ -13,7 +13,7 @@ from webassets.ext.jinja2 import assets
 
 from .dirs import settings, static, templates
 from .errors import show_error
-from .main.views import show_favicon, show_index, show_robots
+from .main.views import show_avatar, show_favicon, show_index, show_robots
 
 try:
     from .tuning import SECRET_KEY, SDESC
@@ -72,6 +72,7 @@ app = StApp(
         Route('/', show_index, name='index'),
         Route('/favicon.ico', show_favicon, name='favicon'),
         Route('/robots.txt', show_robots, name='robots.txt'),
+        Route('/ava/{username}/{size:int}', show_avatar, name='ava'),
         Mount('/static', app=StaticFiles(directory=static), name='static')],
     middleware=middleware,
     exception_handlers=errs)

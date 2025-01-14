@@ -8,3 +8,4 @@ SESSION_LIFETIME=1296000
 USER=jazz
 DB=websitedev
 DSN='postgres://jazz:aa@localhost:5432/websitedev'
+SEND_FILE_MAX_AGE=3600
