@@ -9,3 +9,4 @@ USER=jazz
 DB=websitedev
 DSN='postgres://jazz:aa@localhost:5432/websitedev'
 SEND_FILE_MAX_AGE=3600
+REDI='redis://localhost:6379/0'

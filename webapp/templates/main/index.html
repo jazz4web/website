@@ -25,7 +25,11 @@
   <div class="flashed-alert">
     <div class="today-field"></div>
     <div class="empty-message">
-      Сайт в стадии разработки, попробуйте зайти позже.
+      {% if message %}
+        {{ message }}
+      {% else %}
+        Сайт в стадии разработки, попробуйте зайти позже.
+      {% endif %}
     </div>
   </div>
 {% endblock page_body %}
