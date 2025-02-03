@@ -59,15 +59,21 @@ async def show_robots(request):
 
 async def show_index(request):
     conn = await get_conn(request.app.config)
+    cu = None
+    realm = request.query_params.get('realm')
     amount = await conn.fetchval('SELECT count(*) FROM users')
+    if cu is None:
+        if realm == 'login':
+            await conn.close()
+            return request.app.jinja.TemplateResponse(
+                'main/login.html',
+                {'request': request,
+                 'listed': False})
     await conn.close()
-    from ..common.redi import get_rc
-    rc = await get_rc(request)
-    message = await rc.get('message')
-    await rc.close()
     await set_flashed(request, f'Известно пользователей: {amount}.')
     return request.app.jinja.TemplateResponse(
         'main/index.html',
         {'request': request,
-         'message': message,
+         'message': 'Читайте меня, читайте..!',
+         'listed': True,
          'flashed': await get_flashed(request)})

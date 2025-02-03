@@ -2,5 +2,11 @@
   padding: 4px 0 6px;
   margin-left: auto;
   margin-right: auto;
-  width: 600px;
+  width: 840px;
+}
+
+@media (max-width: 768px) {
+  #page-content {
+    width: 748px;
+  }
 }

@@ -68,7 +68,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a id="login" href="/">Войти</a>
+                  <a id="login" href="/?realm=login">Войти</a>
                 </li>
                 <li>
                   <a id="reg" href="/">Создать пароль</a>
@@ -93,7 +93,8 @@
           {% endfor %}
         </div>
       {% endif %}
-      <div id="mc">
+      <div id="mc"
+           class="{% if listed %}listed{% else %}nonlisted{% endif %}">
         {% block page_body %}{% endblock page_body %}
       </div>
     </div>
