@@ -20,3 +20,5 @@ $ ln -s -T ~/sites/website/webapp/static/vendor/bootstrap/fonts \
   webapp/static/generic/fonts
 $ python runserver.py
 ```
+
+Проект закрыт.
